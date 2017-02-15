@@ -1,0 +1,30 @@
+<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+		You picked:
+		<ul id="results">
+			
+		</ul>
+	</body>
+
+	<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+
+  <script type="text/javascript">
+  	$.get("/genre")
+  	.done(function(data){
+  		console.log(data);
+  		data.genreList.forEach(function(genre){
+  			var $li = $("<li>").text(genre);
+  			$("#results").append($li);
+  		})
+  	})
+  		
+  	
+  </script>
+
+</html>
