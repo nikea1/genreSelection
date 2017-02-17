@@ -7,6 +7,7 @@
     	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 		<title>Recomended Genre</title>
 
+		<link rel="stylesheet" type="text/css" href="./styles/reset.css">
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -27,6 +28,26 @@
 				background-color: #dddddd
 			}
 
+			li:active{
+				background-color: #aaaaaa
+			}
+
+			label{
+				display: block
+			}
+
+			h1{
+				color: purple;
+			}
+
+			/*p{
+				color: limegreen;
+			}*/
+
+			#log{
+				color: red;
+			}
+
 			.checked{
 				background-color: #dddddd
 			}
@@ -37,16 +58,17 @@
 	<body>
 		<div class="container">
 
-		<h1>Customize Your Reading Experience</h1>
-		<p>Don't know where to start? We can help with that.</p>
-		<p>Chose 3 to 5 genres and we'll bring up </p>
-		
+		<h1 class="text-center">Customize Your Reading Experience</h1>
+		<p class="text-center">Don't know where to start? We can help with that.</p>
+		<p class="text-center">Choose 3 to 5 of your favorite genres and we'll bring up something you might like.</p>
+		<p class="text-center" id=log></p>
 			<div class="listContainer center-block">
 				<form action="/recommendations" method="POST">
-					<div id=log></div>
-
+					
 					<div class="row">
+
 						<div class="col-md-offset-4 col-md-4">
+							<hr />
 							<ul id="recommendations"></ul>
 						</div>
 					</div>
@@ -77,41 +99,41 @@
 	<script type="text/javascript">
 		var genre = ["Action/Adventure", "Comedy", "Romance", "Mystery", "Horror", "Manga/Comic", "Fantasy", "Sci-fi", "Historical", "Parody", "Drama", "Crime", "Western"];
 
-		// var rec = [];
+		var rec = [];
 
-		// //if list of genre is greater than 5 randomly pick five genres
-		// if(genre.length > 5){
-		// 	//loop untill five items are in array
-		// 	while(rec.length < 5){
-		// 		//pick a random number based on size of genre list
-		// 		var r = Math.floor(Math.random()*genre.length);
-		// 		var g = genre[r];	//get genre
-		// 		var unique = true;	//assume genre is unique to recommended list
-		// 		if(rec.length > 0){
-		// 			//loop through everything in rec list to compare to random pick
-		// 			for(var i = 0; i < rec.length; i++){
-		// 				//if match found then random pick was not unique and for loop ends
-		// 				if(rec[i] == g){
-		// 					unique = false;
-		// 					break;
-		// 				}
-		// 			}
-		// 		} 
-		// 		if(unique) rec.push(g) //if unique put genre in recomendation list
-		// 	}
-		// }
-		// else{
-		// 	//if genre list is too small genre list becomes recomendation list
-		// 	rec = genre;
-		// }
+		//if list of genre is greater than 7 randomly pick 7 genres
+		if(genre.length > 7){
+			//loop untill five items are in array
+			while(rec.length < 7){
+				//pick a random number based on size of genre list
+				var r = Math.floor(Math.random()*genre.length);
+				var g = genre[r];	//get genre
+				var unique = true;	//assume genre is unique to recommended list
+				if(rec.length > 0){
+					//loop through everything in rec list to compare to random pick
+					for(var i = 0; i < rec.length; i++){
+						//if match found then random pick was not unique and for loop ends
+						if(rec[i] == g){
+							unique = false;
+							break;
+						}
+					}
+				} 
+				if(unique) rec.push(g) //if unique put genre in recomendation list
+			}
+		}
+		else{
+			//if genre list is too small genre list becomes recomendation list
+			rec = genre;
+		}
 
 		//generate list of genres
-		for(var i = 0; i < genre.length; i++){
+		for(var i = 0; i < rec.length; i++){
 
 			var $li = $("<li>").addClass("genreItem")
-			var $input = $("<input>").attr("type","checkbox").attr("name", "genre[]").attr("id","cb"+i).addClass("genre").val(genre[i]).appendTo($li)
-			var $label = $("<label>").text(genre[i]).addClass("text-center").attr("for", "cb"+i).appendTo($li)
-			$("#recommendations").append($li);
+			var $input = $("<input>").attr("type","checkbox").attr("name", "genre[]").attr("id","cb"+i).addClass("genre").val(rec[i]).appendTo($li)
+			var $label = $("<label>").text(rec[i]).addClass("text-center").attr("for", "cb"+i).appendTo($li)
+			$("#recommendations").append($li).append($("<hr>"));
 		}
 
 		//limits checked to 5
