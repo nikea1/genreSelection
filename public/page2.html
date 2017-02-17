@@ -1,12 +1,67 @@
 <html>
 	<head>
-		<title></title>
+		<meta charset="utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   		<meta name="viewport" content="width=device-width, initial-scale=1">
+    	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<title>Results</title>
+		<link rel="stylesheet" type="text/css" href="./styles/reset.css">
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+		<style>
+		
+			.genre{
+				display: none;
+			}
+
+			li{
+				list-style-type: none
+			}
+
+			/*li:hover{
+				background-color: none
+			}
+
+			li:active{
+				background-color: none
+			}*/
+
+			label{
+				display: block
+			}
+
+			h1{
+				color: purple;
+			}
+
+			/*p{
+				color: limegreen;
+			}*/
+
+			/*#log{
+				color: red;
+			}*/
+
+			/*.checked{
+				background-color: #dddddd
+			}*/
+
+			
+		</style>
 	</head>
 	<body>
-		You picked:
-		<ul id="results">
-			
-		</ul>
+		<div class="container">
+						
+			<div class="jumbotron">
+			  <h1 class="text-center">I see, so your favorite genre of stories are <span id="results"></span>.</h1>
+			  <p class="text-center">Alright, we'll get right on finding the stories you like. So hang tight untill then. :)</p>
+			  
+			</div>
+		</div>
 	</body>
 
 	<script
@@ -15,13 +70,24 @@
   crossorigin="anonymous"></script>
 
   <script type="text/javascript">
+  
   	$.get("/genre")
   	.done(function(data){
   		console.log(data);
-  		data.genreList.forEach(function(genre){
-  			var $li = $("<li>").text(genre);
-  			$("#results").append($li);
-  		})
+  		var string = ""
+  		var list = data.genreList;
+  		for(var i = 0; i < list.length; i++){
+  			if(i == list.length-1)
+  				string += "and "+list[i]
+  			else
+  				string += list[i]+", "
+  		}
+  		$("#results").text(string.toLowerCase());
+  		// data.genreList.forEach(function(genre){
+
+  		// 	// var $li = $("<li>").text(genre).addClass("text-center");
+  		// 	// $("#results").append($li);
+  		// })
   	})
   		
   	
