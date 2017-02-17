@@ -19,6 +19,10 @@
 				display: none;
 			}
 
+			li{
+				list-style-type: none
+			}
+
 			li:hover{
 				background-color: #dddddd
 			}
@@ -31,15 +35,30 @@
 		</style>
 	</head>
 	<body>
+		<div class="container">
+
 		<h1>Customize Your Reading Experience</h1>
 		<p>Don't know where to start? We can help with that.</p>
 		<p>Chose 3 to 5 genres and we'll bring up </p>
-		<form action="/recommendations" method="POST">
+		
+			<div class="listContainer center-block">
+				<form action="/recommendations" method="POST">
+					<div id=log></div>
 
-			<div id=log></div>
-			<ul id="recommendations"></ul>
-			<input type="submit" id="submit" />
-		</form>
+					<div class="row">
+						<div class="col-md-offset-4 col-md-4">
+							<ul id="recommendations"></ul>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-offset-8 col-md-4">
+							<input class="btn btn-primary" type="submit" id="submit" />
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
 
 
 
@@ -91,7 +110,7 @@
 
 			var $li = $("<li>").addClass("genreItem")
 			var $input = $("<input>").attr("type","checkbox").attr("name", "genre[]").attr("id","cb"+i).addClass("genre").val(genre[i]).appendTo($li)
-			var $label = $("<label>").text(genre[i]).attr("for", "cb"+i).appendTo($li)
+			var $label = $("<label>").text(genre[i]).addClass("text-center").attr("for", "cb"+i).appendTo($li)
 			$("#recommendations").append($li);
 		}
 
