@@ -1,0 +1,33 @@
+{
+  "name": "genreselection",
+  "version": "1.0.0",
+  "description": "simple genre selection",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nikea1/genreSelection.git"
+  },
+  "keywords": [
+    "genre",
+    "express",
+    "jquery",
+    "javascript",
+    "html",
+    "node"
+  ],
+  "author": "Adenike Adeyemi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nikea1/genreSelection/issues"
+  },
+  "homepage": "https://github.com/nikea1/genreSelection#readme",
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "express": "^4.14.1",
+    "path": "^0.12.7"
+  }
+}
