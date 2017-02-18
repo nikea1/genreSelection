@@ -13,46 +13,7 @@
 		<!-- Optional theme -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-		<style>
-		
-			.genre{
-				display: none;
-			}
 
-			li{
-				list-style-type: none
-			}
-
-			/*li:hover{
-				background-color: none
-			}
-
-			li:active{
-				background-color: none
-			}*/
-
-			label{
-				display: block
-			}
-
-			h1{
-				color: purple;
-			}
-
-			/*p{
-				color: limegreen;
-			}*/
-
-			/*#log{
-				color: red;
-			}*/
-
-			/*.checked{
-				background-color: #dddddd
-			}*/
-
-			
-		</style>
 	</head>
 	<body>
 		<div class="container">
@@ -89,6 +50,7 @@
 
   	})
 
+  	//when page refreshes redirect to first page
   	window.onbeforeunload = function() { 
     window.setTimeout(function () { 
         window.location = '/';
