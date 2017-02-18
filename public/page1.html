@@ -98,73 +98,93 @@
 		
 
 	<script type="text/javascript">
+		//some list of genres (feel free to change it)
 		var genre = ["Action/Adventure", "Comedy", "Romance", "Mystery", "Horror", "Manga/Comic", "Fantasy", "Sci-fi", "Historical", "Parody", "Drama", "Crime", "Western"];
 
-		var rec = [];
+		
+		var rec = []; //empty container for displaying on window
 
 		//if list of genre is greater than 7 randomly pick 7 genres
-		if(genre.length > 7){
-			//loop untill five items are in array
-			while(rec.length < 7){
-				//pick a random number based on size of genre list
-				var r = Math.floor(Math.random()*genre.length);
-				var g = genre[r];	//get genre
-				var unique = true;	//assume genre is unique to recommended list
+		if(genre.length > 7){ 
+			
+			while(rec.length < 7){//loop until seven items are in rec list
+				
+				var r = Math.floor(Math.random()*genre.length); //pick a random number based on size of genre list
+				var g = genre[r];	//get genre at that index number
+				var unique = true;	//assume genre is unique to what is in recommended list
 				if(rec.length > 0){
-					//loop through everything in rec list to compare to random pick
+					//loop through everything in rec list to compare to randomly picked genre
 					for(var i = 0; i < rec.length; i++){
 						//if match found then random pick was not unique and for loop ends
 						if(rec[i] == g){
 							unique = false;
 							break;
-						}
-					}
-				} 
-				if(unique) rec.push(g) //if unique put genre in recomendation list
-			}
-		}
+						}//end of if statement
+					}//end of for loop
+				}//end of if statement 
+				if(unique) rec.push(g) //if unique push genre in recomendation list
+			}//end of while loop
+		}//end of if statement
 		else{
-			//if genre list is too small genre list becomes recomendation list
-			rec = genre;
-		}
+			rec = genre; //if genre list is too small genre list becomes recomendation list
+		}//end of else statement
 
 		//generate list of genres
 		for(var i = 0; i < rec.length; i++){
 
+			//create li tag
 			var $li = $("<li>").addClass("genreItem")
-			var $input = $("<input>").attr("type","checkbox").attr("name", "genre[]").attr("id","cb"+i).addClass("genre").val(rec[i]).appendTo($li)
-			var $label = $("<label>").text(rec[i]).addClass("text-center").attr("for", "cb"+i).appendTo($li)
+
+			//create checkbox input and append to li tag
+			var $input = $("<input>")
+				.attr("type","checkbox")
+				.attr("name", "genre[]")
+				.attr("id","cb"+i)
+				.addClass("genre")
+				.val(rec[i])
+				.appendTo($li)
+
+			//create label for checkbox and append to li tag
+			var $label = $("<label>")
+				.text(rec[i])
+				.addClass("text-center")
+				.attr("for", "cb"+i)
+				.appendTo($li)
+
+			//append to ul tag
 			$("#recommendations").append($li).append($("<hr>"));
 		}
 
 		//limits checked to 5
 		$(document.body).on("click", ".genre", function(){
-			console.log($("input:checked").length);
-
+			
+			//stop checking off other boxes when 5 are already checked
 			if($("input:checkbox:checked").length > 5)
 				return false;
 		})
 
-
+		//toggle class to toggle style of genre list items
 		$(document.body).on("click", ".genreItem", function(){
 
+			// If this item is checked mark class as checked else remove check class
 			if($(this).children(".genre").prop("checked"))
 				$(this).addClass("checked");
 			else
 				$(this).removeClass("checked");
 		})
-		//only submit if at least three are picked
+
+		//only submit if at least three choices are picked
 		$("#submit").on("click",function(){
+			//get number of checked items on page
 			var numChecked = $("input:checkbox:checked").length;
 			
-			if(numChecked< 3){
+			//if less than 3 items are picked submit does not go through
+			if(numChecked < 3){
 
-				$("#log").text("You need to pick atleast 3 genres")
-				return false
+				$("#log").text("You need to pick atleast 3 genres") //display error line when submit fails
+				return false //cancels submit button action
 			}
 			console.log("submiting");
-			// console.log($("input:checked"))
-			// return false;
 
 		})
 

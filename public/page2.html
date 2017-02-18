@@ -19,8 +19,14 @@
 		<div class="container">
 						
 			<div class="jumbotron">
-			  <h1 class="text-center">I see, so your favorite genre of stories are <span id="results"></span>.</h1>
-			  <p class="text-center">Alright, we'll get right on finding the stories you like. So hang tight untill then. :)</p>
+			
+				<h1 class="text-center">
+					I see, so your favorite genre of stories are <span id="results"></span>.
+				</h1>
+
+				<p class="text-center">
+					Alright, we'll get right on finding the stories you like. So hang tight untill then. :)
+				</p>
 			  
 			</div>
 		</div>
@@ -33,19 +39,21 @@
 
   <script type="text/javascript">
  
- 	$(window).on("beforeunload")
 
+ 	//gets data from server to display
   	$.get("/genre")
   	.done(function(data){
   		console.log(data);
   		var string = ""
   		var list = data.genreList;
+  		//build string based on data
   		for(var i = 0; i < list.length; i++){
   			if(i == list.length-1)
   				string += "and "+list[i]
   			else
   				string += list[i]+", "
   		}
+  		//display data in sentence
   		$("#results").text(string.toLowerCase());
 
   	})
